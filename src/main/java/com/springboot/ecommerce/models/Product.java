@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class product {
+public class Product {
     @Id
     @GeneratedValue
     private Integer id;
@@ -33,23 +33,23 @@ public class product {
     @JoinColumn(
             name = "categoryId"
     )
-    private category category;
+    private Category category;
 
     @ManyToOne
     @JoinColumn(
             name = "storeId"
     )
     @JsonBackReference
-    private store store;
+    private Store store;
 
     @OneToOne(
             mappedBy = "product"
     )
-    private voucher voucher;
+    private Voucher voucher;
 
     @OneToMany(
             mappedBy = "product"
     )
     @JsonManagedReference
-    private List<productItem> productItemList;
+    private List<ProductItem> productItemList;
 }

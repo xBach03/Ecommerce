@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class cartItem {
+public class CartItem {
     @Id
     @GeneratedValue
     private Integer id;
@@ -26,17 +26,17 @@ public class cartItem {
             name = "cartId"
     )
     @JsonBackReference
-    private cart cart;
+    private Cart cart;
 
     @OneToOne
     @JoinColumn(
             name = "productItemId"
     )
-    private productItem productItem;
+    private ProductItem productItem;
 
     @ManyToOne
     @JoinColumn(
             name = "storeId"
     )
-    private store store;
+    private Store store;
 }

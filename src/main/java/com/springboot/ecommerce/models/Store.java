@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class store {
+public class Store {
     @Id
     @GeneratedValue
     private Integer id;
@@ -33,12 +33,12 @@ public class store {
             cascade = CascadeType.ALL
     )
     @JsonManagedReference
-    private List<product> productList;
+    private List<Product> productList;
 
     @OneToMany(
             mappedBy = "store",
             cascade = CascadeType.ALL
     )
     @JsonManagedReference
-    private List<cartItem> cartItemList;
+    private List<CartItem> cartItemList;
 }

@@ -16,31 +16,25 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "eOrder")
-public class order {
+public class Cart {
     @Id
     @GeneratedValue
     private Integer id;
 
-    private LocalDate createdDate;
-
     private Double totalPrice;
 
-    private String paymentInfo;
-
-    private String status;
+    private LocalDate createdDate;
 
     @ManyToOne
     @JoinColumn(
             name = "eUserId"
     )
     @JsonBackReference
-    private user user;
+    private User user;
 
     @OneToMany(
-            mappedBy = "order",
-            cascade = CascadeType.ALL
+            mappedBy = "cart"
     )
     @JsonManagedReference
-    private List<orderItem> orderItemList;
+    private List<CartItem> cartItemList;
 }

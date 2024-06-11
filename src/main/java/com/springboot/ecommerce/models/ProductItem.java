@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class productItem {
+public class ProductItem {
     @Id
     @GeneratedValue
     private Integer id;
@@ -29,17 +29,17 @@ public class productItem {
     @OneToOne(
             mappedBy = "productItem"
     )
-    private cartItem cartItem;
+    private CartItem cartItem;
 
     @OneToOne(
             mappedBy = "productItem"
     )
-    private orderItem orderItem;
+    private OrderItem orderItem;
 
     @ManyToOne
     @JoinColumn(
             name = "productId"
     )
-    private product product;
+    private Product product;
 
 }

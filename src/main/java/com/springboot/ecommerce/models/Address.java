@@ -1,7 +1,6 @@
 package com.springboot.ecommerce.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,19 +8,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
-public class cart {
+@AllArgsConstructor
+public class Address {
     @Id
     @GeneratedValue
     private Integer id;
 
-    private Double totalPrice;
+    private String country;
+
+    private String city;
+
+    private String street;
 
     private LocalDate createdDate;
 
@@ -30,11 +32,12 @@ public class cart {
             name = "eUserId"
     )
     @JsonBackReference
-    private user user;
+    private User user;
 
-    @OneToMany(
-            mappedBy = "cart"
-    )
-    @JsonManagedReference
-    private List<cartItem> cartItemList;
+    public Address(String country, String city, String street, LocalDate createdDate) {
+        this.country = country;
+        this.city = city;
+        this.street = street;
+        this.createdDate = createdDate;
+    }
 }

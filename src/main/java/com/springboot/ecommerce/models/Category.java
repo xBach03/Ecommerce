@@ -11,10 +11,13 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class category {
+public class Category {
     @Id
     private Integer id;
 
+    @Column(
+            unique = true
+    )
     private String name;
 
     private String description;
@@ -22,6 +25,6 @@ public class category {
     @OneToOne(
             mappedBy = "category"
     )
-    private product product;
+    private Product product;
 
 }

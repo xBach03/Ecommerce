@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class voucher {
+public class Voucher {
     @Id
     @GeneratedValue
     private Integer id;
@@ -33,12 +33,20 @@ public class voucher {
     @JoinColumn(
             name = "productId"
     )
-    private product product;
+    private Product product;
 
     @ManyToOne
     @JoinColumn(
             name = "eUserId"
     )
     @JsonBackReference
-    private user user;
+    private User user;
+
+    public Voucher(String name, String description, String discountAmount, LocalDate createdDate, LocalDate validDate) {
+        this.name = name;
+        this.description = description;
+        this.discountAmount = discountAmount;
+        this.createdDate = createdDate;
+        this.validDate = validDate;
+    }
 }

@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class orderItem {
+public class OrderItem {
     @Id
     @GeneratedValue
     private Integer id;
@@ -23,11 +23,11 @@ public class orderItem {
     @JoinColumn(
             name = "orderId"
     )
-    private order order;
+    private Order order;
 
     @OneToOne
     @JoinColumn(
             name = "productItemId"
     )
-    private productItem productItem;
+    private ProductItem productItem;
 }
