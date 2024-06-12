@@ -25,6 +25,8 @@ public class User implements UserDetails {
     @GeneratedValue
     private Integer id;
 
+    private String username;
+
     private String password;
 
     private String phoneNumber;
@@ -103,9 +105,11 @@ public class User implements UserDetails {
         return password;
     }
 
-    public User(String password, String email, Role role) {
+    public User(String username, String password, String email, Role role, LocalDate date) {
+        this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
+        this.createdDate = date;
     }
 }

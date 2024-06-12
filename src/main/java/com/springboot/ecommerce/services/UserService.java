@@ -1,6 +1,6 @@
 package com.springboot.ecommerce.services;
 
-import com.springboot.ecommerce.dtos.user.UserAuthReqDto;
+import com.springboot.ecommerce.dtos.user.UserRegReqDto;
 import com.springboot.ecommerce.models.User;
 import com.springboot.ecommerce.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -14,14 +14,15 @@ public class UserService {
     }
 
 
-    public UserAuthReqDto toUserAuthReqDto(User user) {
-        return new UserAuthReqDto(
-                user.getEmail(),
-                user.getPassword()
+    public UserRegReqDto toUserAuthReqDto(User user) {
+        return new UserRegReqDto(
+                user.getUsername(),
+                user.getPassword(),
+                user.getEmail()
         );
     }
 
-    public UserAuthReqDto save(User user) {
+    public UserRegReqDto save(User user) {
         return toUserAuthReqDto(userRepository.save(user));
     }
 
