@@ -45,28 +45,36 @@ public class User implements UserDetails {
             mappedBy = "user",
             cascade = CascadeType.ALL
     )
-    @JsonManagedReference
+    @JsonManagedReference(
+            value = "user-address"
+    )
     private List<Address> addressList;
 
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL
     )
-    @JsonManagedReference
+    @JsonManagedReference(
+            value = "user-cart"
+    )
     private List<Cart> cartList;
 
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL
     )
-    @JsonManagedReference
+    @JsonManagedReference(
+            value = "user-order"
+    )
     private List<Order> orderList;
 
     @OneToMany(
             mappedBy = "user",
             cascade =  CascadeType.ALL
     )
-    @JsonManagedReference
+    @JsonManagedReference(
+            value = "user-voucher"
+    )
     private List<Voucher> voucherList;
 
 

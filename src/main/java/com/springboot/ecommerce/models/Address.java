@@ -31,7 +31,9 @@ public class Address {
     @JoinColumn(
             name = "eUserId"
     )
-    @JsonBackReference
+    @JsonBackReference(
+            value = "user-address"
+    )
     private User user;
 
     public Address(String country, String city, String street, LocalDate createdDate) {

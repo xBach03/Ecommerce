@@ -39,7 +39,9 @@ public class Product {
     @JoinColumn(
             name = "storeId"
     )
-    @JsonBackReference
+    @JsonBackReference(
+            value = "store-product"
+    )
     private Store store;
 
     @OneToOne(
@@ -50,6 +52,8 @@ public class Product {
     @OneToMany(
             mappedBy = "product"
     )
-    @JsonManagedReference
+    @JsonManagedReference(
+            value = "product-productItem"
+    )
     private List<ProductItem> productItemList;
 }

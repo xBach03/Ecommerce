@@ -39,7 +39,9 @@ public class Voucher {
     @JoinColumn(
             name = "eUserId"
     )
-    @JsonBackReference
+    @JsonBackReference(
+            value = "user-voucher"
+    )
     private User user;
 
     public Voucher(String name, String description, String discountAmount, LocalDate createdDate, LocalDate validDate) {

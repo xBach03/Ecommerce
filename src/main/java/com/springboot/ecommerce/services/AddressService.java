@@ -6,6 +6,7 @@ import com.springboot.ecommerce.models.Address;
 import com.springboot.ecommerce.repositories.AddressRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,7 +49,8 @@ public class AddressService {
                 .orElse(null);
     }
 
-    public AddressDto save(AddressDto addressDto) {
-        return toAddressDto(addressRepository.save(toAddress(addressDto)));
+    public AddressDto save(Address address) {
+        address.setCreatedDate(LocalDate.now());
+        return toAddressDto(addressRepository.save(address));
     }
 }

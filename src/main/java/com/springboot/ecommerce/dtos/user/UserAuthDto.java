@@ -1,6 +1,6 @@
 package com.springboot.ecommerce.dtos.user;
 
-public record UserAuthReqDto(
+public record UserAuthDto(
         String email,
         String password
 ) {

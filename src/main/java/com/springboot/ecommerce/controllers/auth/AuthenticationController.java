@@ -1,8 +1,8 @@
 package com.springboot.ecommerce.controllers.auth;
 
 
-import com.springboot.ecommerce.dtos.user.UserAuthReqDto;
-import com.springboot.ecommerce.dtos.user.UserRegReqDto;
+import com.springboot.ecommerce.dtos.user.UserAuthDto;
+import com.springboot.ecommerce.dtos.user.UserRegDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +22,7 @@ public class AuthenticationController {
 
     @PostMapping("/register/user")
     public ResponseEntity<AuthenticationResponse> userRegister(
-            @RequestBody UserRegReqDto regRequest
+            @RequestBody UserRegDto regRequest
     ) {
         AuthenticationResponse authenticationResponse = authenticationService.userRegister(regRequest);
         if(authenticationResponse == null) {
@@ -33,7 +33,7 @@ public class AuthenticationController {
 
     @PostMapping("/authenticate/user")
     public ResponseEntity<AuthenticationResponse> userAuthenticate(
-            @RequestBody UserAuthReqDto authRequest
+            @RequestBody UserAuthDto authRequest
             ) {
         AuthenticationResponse authenticationResponse = authenticationService.userAuthenticate(authRequest);
         if(authenticationResponse == null) {
@@ -44,7 +44,7 @@ public class AuthenticationController {
 
     @PostMapping("/register/admin")
     public ResponseEntity<AuthenticationResponse> adminRegister(
-            @RequestBody UserRegReqDto regRequest
+            @RequestBody UserRegDto regRequest
     ) {
         AuthenticationResponse authenticationResponse = authenticationService.adminRegister(regRequest);
         if(authenticationResponse == null) {
@@ -55,7 +55,7 @@ public class AuthenticationController {
 
     @PostMapping("/authenticate/admin")
     public ResponseEntity<AuthenticationResponse> adminAuthenticate(
-            @RequestBody UserAuthReqDto authRequest
+            @RequestBody UserAuthDto authRequest
     ) {
         AuthenticationResponse authenticationResponse = authenticationService.adminAuthenticate(authRequest);
         if(authenticationResponse == null) {

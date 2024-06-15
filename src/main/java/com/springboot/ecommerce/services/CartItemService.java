@@ -37,4 +37,8 @@ public class CartItemService {
                 .map(this::toCartItemDto)
                 .collect(Collectors.toList());
     }
+
+    public CartItemDto save(CartItem cartItem) {
+        return toCartItemDto(cartItemRepository.save(cartItem));
+    }
 }

@@ -1,5 +1,6 @@
 package com.springboot.ecommerce.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,9 @@ public class OrderItem {
     @ManyToOne
     @JoinColumn(
             name = "orderId"
+    )
+    @JsonBackReference(
+            value = "order-orderItem"
     )
     private Order order;
 

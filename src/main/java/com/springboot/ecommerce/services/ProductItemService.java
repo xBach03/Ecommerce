@@ -31,4 +31,14 @@ public class ProductItemService {
                 .map(this::toProductItemDto)
                 .collect(Collectors.toList());
     }
+
+    public List<ProductItemDto> findAllByProductId(Integer id) {
+        return productItemRepository.findAllByProductId(id).stream()
+                .map(this::toProductItemDto)
+                .collect(Collectors.toList());
+    }
+
+    public ProductItemDto save(ProductItem productItem) {
+        return toProductItemDto(productItemRepository.save(productItem));
+    }
 }

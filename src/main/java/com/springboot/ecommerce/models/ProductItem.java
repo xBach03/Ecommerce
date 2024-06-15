@@ -1,5 +1,6 @@
 package com.springboot.ecommerce.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,6 +40,9 @@ public class ProductItem {
     @ManyToOne
     @JoinColumn(
             name = "productId"
+    )
+    @JsonBackReference(
+            value = "product-productItem"
     )
     private Product product;
 

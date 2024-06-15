@@ -29,12 +29,16 @@ public class Cart {
     @JoinColumn(
             name = "eUserId"
     )
-    @JsonBackReference
+    @JsonBackReference(
+            value = "user-cart"
+    )
     private User user;
 
     @OneToMany(
             mappedBy = "cart"
     )
-    @JsonManagedReference
+    @JsonManagedReference(
+            value = "cart-cartItem"
+    )
     private List<CartItem> cartItemList;
 }

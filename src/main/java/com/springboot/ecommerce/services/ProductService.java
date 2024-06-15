@@ -5,6 +5,7 @@ import com.springboot.ecommerce.models.Product;
 import com.springboot.ecommerce.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,10 +26,21 @@ public class ProductService {
         );
     }
 
+    public List<ProductDto> findAll() {
+        return productRepository.findAll().stream()
+                .map(this::toProductDto)
+                .collect(Collectors.toList());
+    }
+
     public List<ProductDto> findByName(String name) {
         return productRepository.findAllByName(name)
                 .stream()
                 .map(this::toProductDto)
                 .collect(Collectors.toList());
+    }
+
+    public ProductDto save(Product product) {
+        product.setCreatedDate(LocalDate.now());
+        return toProductDto(productRepository.save(product));
     }
 }

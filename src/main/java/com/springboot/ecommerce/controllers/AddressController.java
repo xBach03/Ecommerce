@@ -1,6 +1,7 @@
 package com.springboot.ecommerce.controllers;
 
 import com.springboot.ecommerce.dtos.address.AddressDto;
+import com.springboot.ecommerce.models.Address;
 import com.springboot.ecommerce.services.AddressService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +37,8 @@ public class AddressController {
     }
 
     @PostMapping("/addresses")
-    public ResponseEntity<AddressDto> save(@RequestBody AddressDto addressDto) {
-        AddressDto addressDtoRes = addressService.save(addressDto);
+    public ResponseEntity<AddressDto> save(@RequestBody Address address) {
+        AddressDto addressDtoRes = addressService.save(address);
         if(addressDtoRes== null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

@@ -5,6 +5,7 @@ import com.springboot.ecommerce.models.Cart;
 import com.springboot.ecommerce.repositories.CartRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,5 +37,9 @@ public class CartService {
                 .collect(Collectors.toList());
     }
 
+    public CartDto save(Cart cart) {
+        cart.setCreatedDate(LocalDate.now());
+        return toCartDto(cartRepository.save(cart));
+    }
 }
 

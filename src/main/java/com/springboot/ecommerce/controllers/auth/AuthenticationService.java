@@ -1,8 +1,9 @@
 package com.springboot.ecommerce.controllers.auth;
 
 import com.springboot.ecommerce.config.JwtService;
-import com.springboot.ecommerce.dtos.user.UserAuthReqDto;
-import com.springboot.ecommerce.dtos.user.UserRegReqDto;
+import com.springboot.ecommerce.dtos.user.UserAuthDto;
+import com.springboot.ecommerce.dtos.user.UserDto;
+import com.springboot.ecommerce.dtos.user.UserRegDto;
 import com.springboot.ecommerce.models.Role;
 import com.springboot.ecommerce.models.User;
 import com.springboot.ecommerce.services.UserService;
@@ -29,11 +30,11 @@ public class AuthenticationService {
         this.authenticationManager = authenticationManager;
     }
 
-    public AuthenticationResponse userRegister(UserRegReqDto userRegReqDto) {
+    public AuthenticationResponse userRegister(UserRegDto userRegDto) {
         User user = new User(
-                userRegReqDto.username(),
-                passwordEncoder.encode(userRegReqDto.password()),
-                userRegReqDto.email(),
+                userRegDto.username(),
+                passwordEncoder.encode(userRegDto.password()),
+                userRegDto.email(),
                 Role.USER,
                 LocalDate.now()
         );
@@ -43,23 +44,23 @@ public class AuthenticationService {
     }
 
 
-    public AuthenticationResponse userAuthenticate(UserAuthReqDto userAuthReqDto) {
+    public AuthenticationResponse userAuthenticate(UserAuthDto userAuthDto) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        userAuthReqDto.email(),
-                        userAuthReqDto.password()
+                        userAuthDto.email(),
+                        userAuthDto.password()
                 )
         );
-        var user = userService.findByEmail(userAuthReqDto.email());
+        var user = userService.findByEmailForAuthentication(userAuthDto.email());
         var jwtToken = jwtService.generateToken(user);
         return new AuthenticationResponse(jwtToken);
     }
 
-    public AuthenticationResponse adminRegister(UserRegReqDto userRegReqDto) {
+    public AuthenticationResponse adminRegister(UserRegDto userRegDto) {
         User user = new User(
-                userRegReqDto.username(),
-                passwordEncoder.encode(userRegReqDto.password()),
-                userRegReqDto.email(),
+                userRegDto.username(),
+                passwordEncoder.encode(userRegDto.password()),
+                userRegDto.email(),
                 Role.ADMIN,
                 LocalDate.now()
         );
@@ -67,14 +68,14 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         return new AuthenticationResponse(jwtToken);
     }
-    public AuthenticationResponse adminAuthenticate(UserAuthReqDto userAuthReqDto) {
+    public AuthenticationResponse adminAuthenticate(UserAuthDto userAuthDto) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        userAuthReqDto.email(),
-                        userAuthReqDto.password()
+                        userAuthDto.email(),
+                        userAuthDto.password()
                 )
         );
-        var user = userService.findByEmail(userAuthReqDto.email());
+        var user = userService.findByEmailForAuthentication(userAuthDto.email());
         var jwtToken = jwtService.generateToken(user);
         return new AuthenticationResponse(jwtToken);
     }

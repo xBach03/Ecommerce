@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                 (authorizeHttpRequests) -> {
                     authorizeHttpRequests
-                            .requestMatchers("/api/v1/auth/**").permitAll();
+                            .requestMatchers("/jwt-api/**").permitAll();
                     authorizeHttpRequests.anyRequest().authenticated();
                 }
                 ).sessionManagement(

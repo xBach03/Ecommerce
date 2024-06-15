@@ -1,6 +1,7 @@
 package com.springboot.ecommerce.controllers;
 
 import com.springboot.ecommerce.dtos.cart.CartDto;
+import com.springboot.ecommerce.models.Cart;
 import com.springboot.ecommerce.services.CartService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,12 @@ public class CartController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(cartList, HttpStatus.OK);
+    }
+
+    @PostMapping("/carts")
+    public ResponseEntity<CartDto> save(@RequestBody Cart cart) {
+        CartDto savedCart = cartService.save(cart);
+        return savedCart == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(savedCart, HttpStatus.OK);
     }
 
 }

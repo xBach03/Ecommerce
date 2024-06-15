@@ -5,6 +5,7 @@ import com.springboot.ecommerce.models.Voucher;
 import com.springboot.ecommerce.repositories.VoucherRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,6 +52,7 @@ public class VoucherService {
     }
 
     public VoucherDto save(Voucher voucher) {
+        voucher.setCreatedDate(LocalDate.now());
         return toVoucherDto(voucherRepository.save(voucher));
     }
 }

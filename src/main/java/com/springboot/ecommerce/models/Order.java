@@ -34,13 +34,17 @@ public class Order {
     @JoinColumn(
             name = "eUserId"
     )
-    @JsonBackReference
+    @JsonBackReference(
+            value = "user-order"
+    )
     private User user;
 
     @OneToMany(
             mappedBy = "order",
             cascade = CascadeType.ALL
     )
-    @JsonManagedReference
+    @JsonManagedReference(
+            value = "order-orderItem"
+    )
     private List<OrderItem> orderItemList;
 }

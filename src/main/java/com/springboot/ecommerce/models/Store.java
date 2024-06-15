@@ -32,13 +32,17 @@ public class Store {
             mappedBy = "store",
             cascade = CascadeType.ALL
     )
-    @JsonManagedReference
+    @JsonManagedReference(
+            value = "store-product"
+    )
     private List<Product> productList;
 
     @OneToMany(
             mappedBy = "store",
             cascade = CascadeType.ALL
     )
-    @JsonManagedReference
+    @JsonManagedReference(
+            value = "store-cartItem"
+    )
     private List<CartItem> cartItemList;
 }

@@ -1,9 +1,14 @@
 package com.springboot.ecommerce.services;
 
-import com.springboot.ecommerce.dtos.user.UserRegReqDto;
+import com.springboot.ecommerce.dtos.user.UserAuthDto;
+import com.springboot.ecommerce.dtos.user.UserDto;
+import com.springboot.ecommerce.dtos.user.UserRegDto;
 import com.springboot.ecommerce.models.User;
 import com.springboot.ecommerce.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -14,19 +19,48 @@ public class UserService {
     }
 
 
-    public UserRegReqDto toUserAuthReqDto(User user) {
-        return new UserRegReqDto(
+    public UserRegDto toUserRegReqDto(User user) {
+        return new UserRegDto(
                 user.getUsername(),
                 user.getPassword(),
                 user.getEmail()
         );
     }
 
-    public UserRegReqDto save(User user) {
-        return toUserAuthReqDto(userRepository.save(user));
+    public UserAuthDto toUserAuthDto(User user) {
+        return new UserAuthDto(
+                user.getEmail(),
+                user.getPassword()
+        );
     }
 
-    public User findByEmail(String email) {
+    public UserDto toUserDto(User user) {
+        return new UserDto(
+                user.getPassword(),
+                user.getPhoneNumber(),
+                user.getEmail(),
+                user.getGender(),
+                user.getCreatedDate()
+        );
+    }
+
+    public UserRegDto save(User user) {
+
+        return toUserRegReqDto(userRepository.save(user));
+    }
+
+    public User findByEmailForAuthentication(String email) {
         return userRepository.findByEmail(email).orElse(null);
     }
+
+    public List<UserDto> findAll() {
+        return userRepository.findAll().stream()
+                .map(this::toUserDto)
+                .collect(Collectors.toList());
+    }
+
+    public UserDto findByEmail(String email) {
+        return userRepository.findByEmail(email).map(this::toUserDto).orElse(null);
+    }
+
 }
