@@ -38,4 +38,10 @@ public class CategoryController {
         CategoryDto savedCategory = categoryService.save(category);
         return savedCategory == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(savedCategory, HttpStatus.OK);
     }
+
+    @DeleteMapping("/categories/delete/{category-id}")
+    public ResponseEntity<CategoryDto> delete(@PathVariable("category-id") Integer id) {
+        CategoryDto deletedCategory = categoryService.delete(id);
+        return deletedCategory == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(deletedCategory, HttpStatus.OK);
+    }
 }

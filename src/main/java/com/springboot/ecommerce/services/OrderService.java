@@ -42,4 +42,10 @@ public class OrderService {
         order.setCreatedDate(LocalDate.now());
         return toOrderDto(orderRepository.save(order));
     }
+
+    public OrderDto delete(Integer id) {
+        OrderDto deletedOrder = orderRepository.findById(id).map(this::toOrderDto).orElse(null);
+        orderRepository.deleteById(id);
+        return deletedOrder;
+    }
 }

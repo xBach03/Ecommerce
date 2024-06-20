@@ -5,6 +5,8 @@ import com.springboot.ecommerce.dtos.user.UserDto;
 import com.springboot.ecommerce.dtos.user.UserRegDto;
 import com.springboot.ecommerce.models.User;
 import com.springboot.ecommerce.repositories.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -63,4 +65,17 @@ public class UserService {
         return userRepository.findByEmail(email).map(this::toUserDto).orElse(null);
     }
 
+    public User findById(Integer id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    public User getCurrentUser() {
+        User user = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication != null && authentication.isAuthenticated()) {
+            String email = authentication.getName();
+            user = userRepository.findByEmail(email).orElse(null);
+        }
+        return user;
+    }
 }

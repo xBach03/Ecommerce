@@ -43,4 +43,10 @@ public class ProductService {
         product.setCreatedDate(LocalDate.now());
         return toProductDto(productRepository.save(product));
     }
+
+    public ProductDto delete(Integer id) {
+        ProductDto deletedProduct = productRepository.findById(id).map(this::toProductDto).orElse(null);
+        productRepository.deleteById(id);
+        return deletedProduct;
+    }
 }

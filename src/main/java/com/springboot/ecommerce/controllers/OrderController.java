@@ -40,4 +40,10 @@ public class OrderController {
         OrderDto savedOrder = orderService.save(order);
         return savedOrder == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(savedOrder, HttpStatus.OK);
     }
+
+    @DeleteMapping("/orders/delete/{order-id}")
+    public ResponseEntity<OrderDto> delete(@PathVariable("order-id") Integer id) {
+        OrderDto deletedOrder = orderService.delete(id);
+        return deletedOrder == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(deletedOrder, HttpStatus.OK);
+    }
 }

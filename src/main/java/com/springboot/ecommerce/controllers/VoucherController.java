@@ -36,6 +36,7 @@ public class VoucherController {
         return new ResponseEntity<>(voucherDto, HttpStatus.OK);
     }
 
+
     @PostMapping("/vouchers")
     public ResponseEntity<VoucherDto> save(@RequestBody Voucher voucher) {
         if(voucher == null) {
@@ -44,5 +45,10 @@ public class VoucherController {
         return new ResponseEntity<>(voucherService.save(voucher), HttpStatus.OK);
     }
 
+    @DeleteMapping("/vouchers/delete/{voucher-id}")
+    public ResponseEntity<VoucherDto> delete(@PathVariable("voucher-id") Integer id) {
+        VoucherDto deletedVoucher = voucherService.delete(id);
+        return deletedVoucher == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(deletedVoucher, HttpStatus.OK);
+    }
 
 }

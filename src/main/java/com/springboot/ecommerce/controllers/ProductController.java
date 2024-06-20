@@ -35,4 +35,10 @@ public class ProductController {
         ProductDto savedProduct = productService.save(product);
         return savedProduct == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(savedProduct, HttpStatus.OK);
     }
+
+    @DeleteMapping("/products/delete/{product-id}")
+    public ResponseEntity<ProductDto> delete(@PathVariable("product-id") Integer id) {
+        ProductDto deletedProduct = productService.delete(id);
+        return deletedProduct == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(deletedProduct, HttpStatus.OK);
+    }
 }

@@ -1,6 +1,7 @@
 package com.springboot.ecommerce.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.springboot.ecommerce.auth.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -80,7 +81,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return role.getAuthorities();
     }
 
     @Override

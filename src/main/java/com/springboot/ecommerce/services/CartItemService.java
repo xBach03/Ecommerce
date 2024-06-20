@@ -41,4 +41,10 @@ public class CartItemService {
     public CartItemDto save(CartItem cartItem) {
         return toCartItemDto(cartItemRepository.save(cartItem));
     }
+
+    public CartItemDto delete(Integer id) {
+        CartItemDto deletedCartItem = cartItemRepository.findById(id).map(this::toCartItemDto).orElse(null);
+        cartItemRepository.deleteById(id);
+        return deletedCartItem;
+    }
 }

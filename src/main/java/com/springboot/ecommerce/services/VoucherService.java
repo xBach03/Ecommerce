@@ -55,4 +55,16 @@ public class VoucherService {
         voucher.setCreatedDate(LocalDate.now());
         return toVoucherDto(voucherRepository.save(voucher));
     }
+
+    public List<VoucherDto> findAllByUserId(Integer id) {
+        return voucherRepository.findAllByUserId(id).stream()
+                .map(this::toVoucherDto)
+                .collect(Collectors.toList());
+    }
+
+    public VoucherDto delete(Integer id) {
+        VoucherDto deletedVoucher = findById(id);
+        voucherRepository.deleteById(id);
+        return deletedVoucher;
+    }
 }

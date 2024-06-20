@@ -1,10 +1,8 @@
-package com.springboot.ecommerce.controllers.auth;
+package com.springboot.ecommerce.auth;
 
 import com.springboot.ecommerce.config.JwtService;
 import com.springboot.ecommerce.dtos.user.UserAuthDto;
-import com.springboot.ecommerce.dtos.user.UserDto;
 import com.springboot.ecommerce.dtos.user.UserRegDto;
-import com.springboot.ecommerce.models.Role;
 import com.springboot.ecommerce.models.User;
 import com.springboot.ecommerce.services.UserService;
 import org.springframework.security.authentication.AuthenticationManager;

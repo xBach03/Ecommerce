@@ -3,6 +3,7 @@ package com.springboot.ecommerce.services;
 import com.springboot.ecommerce.dtos.category.CategoryDto;
 import com.springboot.ecommerce.models.Category;
 import com.springboot.ecommerce.repositories.CategoryRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,5 +40,12 @@ public class CategoryService {
 
     public CategoryDto save(Category category) {
         return toCategoryDto(categoryRepository.save(category));
+    }
+
+
+    public CategoryDto delete(Integer id) {
+        CategoryDto deletedCategory = findById(id);
+        categoryRepository.deleteById(id);
+        return deletedCategory;
     }
 }

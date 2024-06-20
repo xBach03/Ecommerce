@@ -40,4 +40,10 @@ public class OrderItemService {
     public OrderItemDto save(OrderItem orderItem) {
         return toOrderItemDto(orderItemRepository.save(orderItem));
     }
+
+    public OrderItemDto delete(Integer id) {
+        OrderItemDto deletedOrderItem = orderItemRepository.findById(id).map(this::toOrderItemDto).orElse(null);
+        orderItemRepository.deleteById(id);
+        return deletedOrderItem;
+    }
 }

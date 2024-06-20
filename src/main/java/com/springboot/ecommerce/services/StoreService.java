@@ -42,4 +42,10 @@ public class StoreService {
         store.setJoiningDate(LocalDate.now());
         return toStoreDto(storeRepository.save(store));
     }
+
+    public StoreDto delete(Integer id) {
+        StoreDto deletedStore = storeRepository.findById(id).map(this::toStoreDto).orElse(null);
+        storeRepository.deleteById(id);
+        return deletedStore;
+    }
 }

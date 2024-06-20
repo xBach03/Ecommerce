@@ -42,4 +42,10 @@ public class CartController {
         return savedCart == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(savedCart, HttpStatus.OK);
     }
 
+    @DeleteMapping("/carts/delete/{cart-id}")
+    public ResponseEntity<CartDto> delete(@PathVariable("cart-id") Integer id) {
+        CartDto deletedCart = cartService.delete(id);
+        return deletedCart == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(deletedCart, HttpStatus.OK);
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.springboot.ecommerce.controllers.auth;
+package com.springboot.ecommerce.auth;
 
 public record AuthenticationResponse(
         String token

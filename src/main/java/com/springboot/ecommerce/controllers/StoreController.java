@@ -35,4 +35,10 @@ public class StoreController {
         StoreDto savedStore = storeService.save(store);
         return savedStore == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(savedStore, HttpStatus.OK);
     }
+
+    @DeleteMapping("/stores/delete/{store-id}")
+    public ResponseEntity<StoreDto> delete(@PathVariable("store-id") Integer id) {
+        StoreDto deletedStore = storeService.delete(id);
+        return deletedStore == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(deletedStore, HttpStatus.OK);
+    }
 }

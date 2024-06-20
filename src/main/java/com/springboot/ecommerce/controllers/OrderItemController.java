@@ -35,4 +35,11 @@ public class OrderItemController {
         OrderItemDto savedOrderItem = orderItemService.save(orderItem);
         return savedOrderItem == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(savedOrderItem, HttpStatus.OK);
     }
+
+    @DeleteMapping("/items/delete/{item-id}")
+    public ResponseEntity<OrderItemDto> delete(@PathVariable("item-id") Integer id) {
+        OrderItemDto deletedOrderItem = orderItemService.delete(id);
+        return deletedOrderItem == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(deletedOrderItem, HttpStatus.OK);
+    }
+
 }

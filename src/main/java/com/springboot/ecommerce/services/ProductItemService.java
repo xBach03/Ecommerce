@@ -41,4 +41,10 @@ public class ProductItemService {
     public ProductItemDto save(ProductItem productItem) {
         return toProductItemDto(productItemRepository.save(productItem));
     }
+
+    public ProductItemDto delete(Integer id) {
+        ProductItemDto deletedProductItem = productItemRepository.findById(id).map(this::toProductItemDto).orElse(null);
+        productItemRepository.deleteById(id);
+        return deletedProductItem;
+    }
 }

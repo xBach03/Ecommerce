@@ -13,6 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Category {
     @Id
+    @GeneratedValue
     private Integer id;
 
     @Column(

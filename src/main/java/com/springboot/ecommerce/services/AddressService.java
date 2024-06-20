@@ -49,8 +49,20 @@ public class AddressService {
                 .orElse(null);
     }
 
+    public List<AddressDto> findAllByUserId(Integer id) {
+        return addressRepository.findAllByUserId(id).stream()
+                .map(this::toAddressDto)
+                .collect(Collectors.toList());
+    }
+
     public AddressDto save(Address address) {
         address.setCreatedDate(LocalDate.now());
         return toAddressDto(addressRepository.save(address));
+    }
+
+    public AddressDto delete(Integer id) {
+        AddressDto deletedAddress = findById(id);
+        addressRepository.deleteById(id);
+        return deletedAddress;
     }
 }

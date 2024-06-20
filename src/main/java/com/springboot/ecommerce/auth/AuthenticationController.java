@@ -1,4 +1,4 @@
-package com.springboot.ecommerce.controllers.auth;
+package com.springboot.ecommerce.auth;
 
 
 import com.springboot.ecommerce.dtos.user.UserAuthDto;

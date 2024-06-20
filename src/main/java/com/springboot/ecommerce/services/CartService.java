@@ -41,5 +41,11 @@ public class CartService {
         cart.setCreatedDate(LocalDate.now());
         return toCartDto(cartRepository.save(cart));
     }
+
+    public CartDto delete(Integer id) {
+        CartDto deletedCart = cartRepository.findById(id).map(this::toCartDto).orElse(null);
+        cartRepository.deleteById(id);
+        return deletedCart;
+    }
 }
 
