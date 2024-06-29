@@ -46,4 +46,11 @@ public class ProductItem {
     )
     private Product product;
 
+    public ProductItem(String color, String size, Integer soldQuantity, Integer currentQuantity, Double price) {
+        this.color = color;
+        this.size = size;
+        this.soldQuantity = soldQuantity;
+        this.currentQuantity = currentQuantity;
+        this.price = price;
+    }
 }

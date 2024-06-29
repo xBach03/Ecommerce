@@ -18,15 +18,15 @@ public class StoreController {
         this.storeService = storeService;
     }
 
-    @GetMapping("/stores")
-    public ResponseEntity<List<StoreDto>> findAll() {
-        List<StoreDto> storeDtoList = storeService.findAll();
+    @GetMapping("/stores/{page-number}/{page-size}")
+    public ResponseEntity<List<StoreDto>> findAll(@PathVariable("page-number") Integer pageNumber, @PathVariable("page-size") Integer pageSize) {
+        List<StoreDto> storeDtoList = storeService.findAll(pageNumber, pageSize);
         return storeDtoList == null ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(storeDtoList, HttpStatus.OK);
     }
 
-    @GetMapping("/stores/{name}")
-    public ResponseEntity<List<StoreDto>> findAllByName(@PathVariable("name") String name) {
-        List<StoreDto> storeDtoList = storeService.findAllByName(name);
+    @GetMapping("/stores/{name}/{page-number}/{page-size}")
+    public ResponseEntity<List<StoreDto>> findAllByName(@PathVariable("name") String name, @PathVariable("page-number") Integer pageNumber, @PathVariable("page-size") Integer pageSize) {
+        List<StoreDto> storeDtoList = storeService.findAllByName(name, pageNumber, pageSize);
         return storeDtoList == null ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(storeDtoList, HttpStatus.OK);
     }
 

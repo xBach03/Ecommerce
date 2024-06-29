@@ -51,4 +51,11 @@ public class Voucher {
         this.createdDate = createdDate;
         this.validDate = validDate;
     }
+
+    public Voucher(String name, String description, String discountAmount, LocalDate validDate) {
+        this.name = name;
+        this.description = description;
+        this.discountAmount = discountAmount;
+        this.validDate = validDate;
+    }
 }

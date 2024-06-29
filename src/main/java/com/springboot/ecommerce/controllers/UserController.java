@@ -30,9 +30,9 @@ public class UserController {
         return user == null ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @GetMapping("/users")
-    public ResponseEntity<List<UserDto>> findAll() {
-        List<UserDto> userList = userService.findAll();
+    @GetMapping("/users/{page-number}/{page-size}")
+    public ResponseEntity<List<UserDto>> findAll(@PathVariable("page-number") Integer pageNumber, @PathVariable("page-size") Integer pageSize) {
+        List<UserDto> userList = userService.findAll(pageNumber, pageSize);
         return userList == null ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(userList, HttpStatus.OK);
     }
 

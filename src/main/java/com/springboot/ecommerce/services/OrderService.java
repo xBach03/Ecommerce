@@ -3,6 +3,8 @@ package com.springboot.ecommerce.services;
 import com.springboot.ecommerce.dtos.order.OrderDto;
 import com.springboot.ecommerce.models.Order;
 import com.springboot.ecommerce.repositories.OrderRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -26,14 +28,16 @@ public class OrderService {
         );
     }
 
-    public List<OrderDto> findAll() {
-        return orderRepository.findAll().stream()
+    public List<OrderDto> findAll(Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return orderRepository.findAll(pageable).stream()
                 .map(this::toOrderDto)
                 .collect(Collectors.toList());
     }
 
-    public List<OrderDto> findAllByUserId(Integer id) {
-        return orderRepository.findAllByUserId(id).stream()
+    public List<OrderDto> findAllByUserId(Integer id, Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return orderRepository.findAllByUserId(id, pageable).stream()
                 .map(this::toOrderDto)
                 .collect(Collectors.toList());
     }

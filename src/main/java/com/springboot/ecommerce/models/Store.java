@@ -45,4 +45,10 @@ public class Store {
             value = "store-cartItem"
     )
     private List<CartItem> cartItemList;
+
+    public Store(String location, String name, String rate) {
+        this.location = location;
+        this.name = name;
+        this.rate = rate;
+    }
 }

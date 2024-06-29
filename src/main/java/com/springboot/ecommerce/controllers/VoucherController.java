@@ -18,9 +18,9 @@ public class VoucherController {
         this.voucherService = voucherService;
     }
 
-    @GetMapping("/vouchers")
-    public ResponseEntity<List<VoucherDto>> findAll() {
-        List<VoucherDto> voucherList = voucherService.findAll();
+    @GetMapping("/vouchers/{page-number}/{page-size}")
+    public ResponseEntity<List<VoucherDto>> findAll(@PathVariable("page-number") Integer pageNumber, @PathVariable("page-size") Integer pageSize) {
+        List<VoucherDto> voucherList = voucherService.findAll(pageNumber, pageSize);
         if(voucherList == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

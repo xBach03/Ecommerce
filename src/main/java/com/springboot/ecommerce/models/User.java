@@ -114,11 +114,10 @@ public class User implements UserDetails {
         return password;
     }
 
-    public User(String username, String password, String email, Role role, LocalDate date) {
+    public User(String username, String password, String email, Role role) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
-        this.createdDate = date;
     }
 }

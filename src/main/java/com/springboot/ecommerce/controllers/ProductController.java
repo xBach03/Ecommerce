@@ -18,15 +18,15 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/products")
-    public ResponseEntity<List<ProductDto>> findAll() {
-        List<ProductDto> productDtoList = productService.findAll();
+    @GetMapping("/products/{page-number}/{page-size}")
+    public ResponseEntity<List<ProductDto>> findAll(@PathVariable("page-number") Integer pageNumber, @PathVariable("page-size") Integer pageSize) {
+        List<ProductDto> productDtoList = productService.findAll(pageNumber, pageSize);
         return productDtoList == null ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(productDtoList, HttpStatus.OK);
     }
 
-    @GetMapping("/products/{product-name}")
-    public ResponseEntity<List<ProductDto>> findAll(@PathVariable("product-name") String name) {
-        List<ProductDto> productDtoList = productService.findByName(name);
+    @GetMapping("/products/{product-name}/{page-number}/{page-size}")
+    public ResponseEntity<List<ProductDto>> findAll(@PathVariable("product-name") String name, @PathVariable("page-number") Integer pageNumber, @PathVariable("page-size") Integer pageSize) {
+        List<ProductDto> productDtoList = productService.findByName(name, pageNumber, pageSize);
         return productDtoList == null ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(productDtoList, HttpStatus.OK);
     }
 

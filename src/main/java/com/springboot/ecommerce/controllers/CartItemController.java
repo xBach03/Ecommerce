@@ -19,18 +19,18 @@ public class CartItemController {
         this.cartItemService = cartItemService;
     }
 
-    @GetMapping("/cart-items")
-    public ResponseEntity<List<CartItemDto>> findAll() {
-        List<CartItemDto> cartItemList = cartItemService.findAll();
+    @GetMapping("/cart-items/{page-number}/{page-size}")
+    public ResponseEntity<List<CartItemDto>> findAll(@PathVariable("page-number") Integer pageNumber, @PathVariable("page-size") Integer pageSize) {
+        List<CartItemDto> cartItemList = cartItemService.findAll(pageNumber, pageSize);
         if(cartItemList == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(cartItemList, HttpStatus.OK);
     }
 
-    @GetMapping("/cart-items/{cart-id}")
-    public ResponseEntity<List<CartItemDto>> findAllByUserId(@PathVariable("cart-id") Integer id) {
-        List<CartItemDto> cartItemList = cartItemService.findAllByUserId(id);
+    @GetMapping("/cart-items/{cart-id}/{page-number}/{page-size}")
+    public ResponseEntity<List<CartItemDto>> findAllByUserId(@PathVariable("cart-id") Integer id, @PathVariable("page-number") Integer pageNumber, @PathVariable("page-size") Integer pageSize) {
+        List<CartItemDto> cartItemList = cartItemService.findAllByUserId(id, pageNumber, pageSize);
         if(cartItemList == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

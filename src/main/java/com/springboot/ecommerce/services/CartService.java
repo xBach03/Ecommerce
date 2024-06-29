@@ -3,6 +3,8 @@ package com.springboot.ecommerce.services;
 import com.springboot.ecommerce.dtos.cart.CartDto;
 import com.springboot.ecommerce.models.Cart;
 import com.springboot.ecommerce.repositories.CartRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -24,14 +26,16 @@ public class CartService {
         );
     }
 
-    public List<CartDto> findAll() {
-        return cartRepository.findAll().stream()
+    public List<CartDto> findAll(Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return cartRepository.findAll(pageable).stream()
                 .map(this::toCartDto)
                 .collect(Collectors.toList());
     }
 
-    public List<CartDto> findByUser(Integer userId) {
-        return cartRepository.findAllByUserId(userId)
+    public List<CartDto> findByUser(Integer userId, Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return cartRepository.findAllByUserId(userId, pageable)
                 .stream()
                 .map(this::toCartDto)
                 .collect(Collectors.toList());

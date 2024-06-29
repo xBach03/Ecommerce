@@ -18,9 +18,9 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/categories")
-    public ResponseEntity<List<CategoryDto>> findAll() {
-        List<CategoryDto> categoryList = categoryService.findAll();
+    @GetMapping("/categories/{page-number}/{page-size}")
+    public ResponseEntity<List<CategoryDto>> findAll(@PathVariable("page-number") Integer pageNumber, @PathVariable("page-size") Integer pageSize) {
+        List<CategoryDto> categoryList = categoryService.findAll(pageNumber, pageSize);
         if(categoryList == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

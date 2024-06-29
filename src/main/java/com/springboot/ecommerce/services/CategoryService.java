@@ -4,6 +4,8 @@ import com.springboot.ecommerce.dtos.category.CategoryDto;
 import com.springboot.ecommerce.models.Category;
 import com.springboot.ecommerce.repositories.CategoryRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,8 +27,9 @@ public class CategoryService {
         );
     }
 
-    public List<CategoryDto> findAll() {
-        return categoryRepository.findAll()
+    public List<CategoryDto> findAll(Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return categoryRepository.findAll(pageable)
                 .stream()
                 .map(this::toCategoryDto)
                 .collect(Collectors.toList());

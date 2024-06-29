@@ -5,10 +5,13 @@ import com.springboot.ecommerce.dtos.user.UserDto;
 import com.springboot.ecommerce.dtos.user.UserRegDto;
 import com.springboot.ecommerce.models.User;
 import com.springboot.ecommerce.repositories.UserRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,7 +50,7 @@ public class UserService {
     }
 
     public UserRegDto save(User user) {
-
+        user.setCreatedDate(LocalDate.now());
         return toUserRegReqDto(userRepository.save(user));
     }
 
@@ -55,8 +58,9 @@ public class UserService {
         return userRepository.findByEmail(email).orElse(null);
     }
 
-    public List<UserDto> findAll() {
-        return userRepository.findAll().stream()
+    public List<UserDto> findAll(Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return userRepository.findAll(pageable).stream()
                 .map(this::toUserDto)
                 .collect(Collectors.toList());
     }

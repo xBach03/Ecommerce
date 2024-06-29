@@ -56,4 +56,10 @@ public class Product {
             value = "product-productItem"
     )
     private List<ProductItem> productItemList;
+
+    public Product(String name, String description, String rate) {
+        this.name = name;
+        this.description = description;
+        this.rate = rate;
+    }
 }

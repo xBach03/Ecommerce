@@ -2,10 +2,12 @@ package com.springboot.ecommerce.services;
 
 import com.springboot.ecommerce.dtos.address.AddressDto;
 import com.springboot.ecommerce.dtos.address.AddressReqDto;
+
 import com.springboot.ecommerce.models.Address;
 import com.springboot.ecommerce.repositories.AddressRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,14 +20,6 @@ public class AddressService {
         this.addressRepository = addressRepository;
     }
 
-    public Address toAddress(AddressDto addressDto) {
-        return new Address(
-                addressDto.country(),
-                addressDto.city(),
-                addressDto.street(),
-                addressDto.createdDate()
-        );
-    }
 
     public AddressDto toAddressDto(Address address) {
         return new AddressDto(
@@ -36,8 +30,9 @@ public class AddressService {
         );
     }
 
-    public List<AddressDto> findAll() {
-        return addressRepository.findAll()
+    public List<AddressDto> findAll(Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return addressRepository.findAll(pageable)
                 .stream()
                 .map(this::toAddressDto)
                 .collect(Collectors.toList());
@@ -49,8 +44,9 @@ public class AddressService {
                 .orElse(null);
     }
 
-    public List<AddressDto> findAllByUserId(Integer id) {
-        return addressRepository.findAllByUserId(id).stream()
+    public List<AddressDto> findAllByUserId(Integer id, Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return addressRepository.findAllByUserId(id, pageable).stream()
                 .map(this::toAddressDto)
                 .collect(Collectors.toList());
     }

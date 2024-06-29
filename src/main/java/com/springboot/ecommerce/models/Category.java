@@ -28,4 +28,8 @@ public class Category {
     )
     private Product product;
 
+    public Category(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }

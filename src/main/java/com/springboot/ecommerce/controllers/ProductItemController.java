@@ -19,15 +19,15 @@ public class ProductItemController {
         this.productItemService = productItemService;
     }
 
-    @GetMapping("/items")
-    public ResponseEntity<List<ProductItemDto>> findAll() {
-        List<ProductItemDto> productItemDtoList = productItemService.findAll();
+    @GetMapping("/items/{page-number}/{page-size}")
+    public ResponseEntity<List<ProductItemDto>> findAll(@PathVariable("page-number") Integer pageNumber, @PathVariable("page-size") Integer pageSize) {
+        List<ProductItemDto> productItemDtoList = productItemService.findAll(pageNumber, pageSize);
         return productItemDtoList == null ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(productItemDtoList, HttpStatus.OK);
     }
 
-    @GetMapping("/items/{product-id}")
-    public ResponseEntity<List<ProductItemDto>> findAllByProductId(@PathVariable("product-id") Integer id) {
-        List<ProductItemDto> productItemDtoList = productItemService.findAllByProductId(id);
+    @GetMapping("/items/{product-id}/{page-number}/{page-size}")
+    public ResponseEntity<List<ProductItemDto>> findAllByProductId(@PathVariable("product-id") Integer id, @PathVariable("page-number") Integer pageNumber, @PathVariable("page-size") Integer pageSize) {
+        List<ProductItemDto> productItemDtoList = productItemService.findAllByProductId(id, pageNumber, pageSize);
         return productItemDtoList == null ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(productItemDtoList, HttpStatus.OK);
     }
 

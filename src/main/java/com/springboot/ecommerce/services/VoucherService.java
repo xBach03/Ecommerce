@@ -3,6 +3,8 @@ package com.springboot.ecommerce.services;
 import com.springboot.ecommerce.dtos.voucher.VoucherDto;
 import com.springboot.ecommerce.models.Voucher;
 import com.springboot.ecommerce.repositories.VoucherRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -38,8 +40,9 @@ public class VoucherService {
         );
     }
 
-    public List<VoucherDto> findAll() {
-        return voucherRepository.findAll()
+    public List<VoucherDto> findAll(Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return voucherRepository.findAll(pageable)
                 .stream()
                 .map(this::toVoucherDto)
                 .collect(Collectors.toList());
@@ -56,8 +59,9 @@ public class VoucherService {
         return toVoucherDto(voucherRepository.save(voucher));
     }
 
-    public List<VoucherDto> findAllByUserId(Integer id) {
-        return voucherRepository.findAllByUserId(id).stream()
+    public List<VoucherDto> findAllByUserId(Integer id, Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return voucherRepository.findAllByUserId(id, pageable).stream()
                 .map(this::toVoucherDto)
                 .collect(Collectors.toList());
     }

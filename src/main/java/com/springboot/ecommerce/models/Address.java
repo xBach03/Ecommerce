@@ -36,10 +36,10 @@ public class Address {
     )
     private User user;
 
-    public Address(String country, String city, String street, LocalDate createdDate) {
+    public Address(String country, String city, String street) {
         this.country = country;
         this.city = city;
         this.street = street;
-        this.createdDate = createdDate;
+
     }
 }

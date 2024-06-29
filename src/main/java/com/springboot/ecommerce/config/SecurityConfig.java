@@ -43,7 +43,7 @@ public class SecurityConfig {
                                     "/configuration/security",
                                     "/webjars/**"
                             ).permitAll();
-                    authorizeHttpRequests.anyRequest().authenticated();
+                    authorizeHttpRequests.anyRequest().permitAll();
 //                    authorizeHttpRequests.anyRequest().permitAll();
                 }
                 ).sessionManagement(

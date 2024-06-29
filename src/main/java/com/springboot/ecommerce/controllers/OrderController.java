@@ -17,9 +17,9 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/orders")
-    public ResponseEntity<List<OrderDto>> findAll() {
-        List<OrderDto> orderList = orderService.findAll();
+    @GetMapping("/orders/{page-number}/{page-size}")
+    public ResponseEntity<List<OrderDto>> findAll(@PathVariable("page-number") Integer pageNumber, @PathVariable("page-size") Integer pageSize) {
+        List<OrderDto> orderList = orderService.findAll(pageNumber, pageSize);
         if(orderList == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

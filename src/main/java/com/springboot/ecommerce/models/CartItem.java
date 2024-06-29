@@ -44,4 +44,9 @@ public class CartItem {
             value = "store-cartItem"
     )
     private Store store;
+
+    public CartItem(Integer quantity, Double price) {
+        this.quantity = quantity;
+        this.price = price;
+    }
 }

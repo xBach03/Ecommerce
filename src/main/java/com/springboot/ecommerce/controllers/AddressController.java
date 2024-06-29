@@ -18,9 +18,9 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-    @GetMapping("/addresses")
-    public ResponseEntity<List<AddressDto>> findAll() {
-        List<AddressDto> addressList = addressService.findAll();
+    @GetMapping("/addresses/{page-number}/{page-size}")
+    public ResponseEntity<List<AddressDto>> findAll(@PathVariable("page-number") Integer pageNumber, @PathVariable("page-size") Integer pageSize) {
+        List<AddressDto> addressList = addressService.findAll(pageNumber, pageSize);
         if(addressList == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

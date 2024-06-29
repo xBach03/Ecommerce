@@ -47,4 +47,10 @@ public class Order {
             value = "order-orderItem"
     )
     private List<OrderItem> orderItemList;
+
+    public Order(Double totalPrice, String paymentInfo, String status) {
+        this.totalPrice = totalPrice;
+        this.paymentInfo = paymentInfo;
+        this.status = status;
+    }
 }

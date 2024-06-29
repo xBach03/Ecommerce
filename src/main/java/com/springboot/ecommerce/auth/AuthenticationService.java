@@ -33,8 +33,7 @@ public class AuthenticationService {
                 userRegDto.username(),
                 passwordEncoder.encode(userRegDto.password()),
                 userRegDto.email(),
-                Role.USER,
-                LocalDate.now()
+                Role.USER
         );
         userService.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -59,8 +58,7 @@ public class AuthenticationService {
                 userRegDto.username(),
                 passwordEncoder.encode(userRegDto.password()),
                 userRegDto.email(),
-                Role.ADMIN,
-                LocalDate.now()
+                Role.ADMIN
         );
         userService.save(user);
         var jwtToken = jwtService.generateToken(user);

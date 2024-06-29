@@ -18,18 +18,18 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @GetMapping("/carts")
-    public ResponseEntity<List<CartDto>> findAll() {
-        List<CartDto> cartList = cartService.findAll();
+    @GetMapping("/carts/{page-number}/{page-size}")
+    public ResponseEntity<List<CartDto>> findAll(@PathVariable("page-number") Integer pageNumber, @PathVariable("page-size") Integer pageSize) {
+        List<CartDto> cartList = cartService.findAll(pageNumber, pageSize);
         if(cartList == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(cartList, HttpStatus.OK);
     }
 
-    @GetMapping("/carts/{user-id}")
-    public ResponseEntity<List<CartDto>> findByUserId(@PathVariable("user-id") Integer userId) {
-        List<CartDto> cartList = cartService.findByUser(userId);
+    @GetMapping("/carts/{user-id}/{page-number}/{page-size}")
+    public ResponseEntity<List<CartDto>> findByUserId(@PathVariable("user-id") Integer userId, @PathVariable("page-number") Integer pageNumber, @PathVariable("page-size") Integer pageSize) {
+        List<CartDto> cartList = cartService.findByUser(userId, pageNumber, pageSize);
         if(cartList == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
