@@ -53,4 +53,8 @@ public class ProductService {
         productRepository.deleteById(id);
         return deletedProduct;
     }
+
+    public List<ProductDto> findByCategory(String name) {
+       return productRepository.findAllByCategory(name).stream().map(this::toProductDto).toList();
+    }
 }

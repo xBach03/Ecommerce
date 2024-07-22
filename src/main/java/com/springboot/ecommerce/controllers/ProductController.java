@@ -41,4 +41,10 @@ public class ProductController {
         ProductDto deletedProduct = productService.delete(id);
         return deletedProduct == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(deletedProduct, HttpStatus.OK);
     }
+
+    @GetMapping("/products/{c-name}")
+    public ResponseEntity<List<ProductDto>> getByCategory(@PathVariable("c-name") String name) {
+        List<ProductDto> productDtos = productService.findByCategory(name);
+        return productDtos == null ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(productDtos, HttpStatus.OK);
+    }
 }

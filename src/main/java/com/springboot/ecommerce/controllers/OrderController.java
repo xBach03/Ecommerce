@@ -26,9 +26,9 @@ public class OrderController {
         return new ResponseEntity<>(orderList, HttpStatus.OK);
     }
 
-    @GetMapping("/orders/{order-id}")
-    public ResponseEntity<List<OrderDto>> findAllByUserId(@PathVariable("order-id") Integer id) {
-        List<OrderDto> orderList = orderService.findAllByUserId(id);
+    @GetMapping("/orders/{order-id}/{page-number}/{page-size}")
+    public ResponseEntity<List<OrderDto>> findAllByUserId(@PathVariable("order-id") Integer id, @PathVariable("page-number") Integer pageNumber, @PathVariable("page-size") Integer pageSize) {
+        List<OrderDto> orderList = orderService.findAllByUserId(id, pageNumber, pageSize);
         if(orderList == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

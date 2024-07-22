@@ -33,5 +33,8 @@ public class OrderItem {
     @JoinColumn(
             name = "productItemId"
     )
+    @JsonBackReference(
+            value = "productItem-orderItem"
+    )
     private ProductItem productItem;
 }

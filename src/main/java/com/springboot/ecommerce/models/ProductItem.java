@@ -1,6 +1,7 @@
 package com.springboot.ecommerce.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,10 +31,16 @@ public class ProductItem {
     @OneToOne(
             mappedBy = "productItem"
     )
+    @JsonManagedReference(
+            value = "productItem-cartItem"
+    )
     private CartItem cartItem;
 
     @OneToOne(
             mappedBy = "productItem"
+    )
+    @JsonManagedReference(
+            value = "productItem-orderItem"
     )
     private OrderItem orderItem;
 

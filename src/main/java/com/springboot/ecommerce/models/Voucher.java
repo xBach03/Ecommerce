@@ -33,6 +33,9 @@ public class Voucher {
     @JoinColumn(
             name = "productId"
     )
+    @JsonBackReference(
+            value = "product-voucher"
+    )
     private Product product;
 
     @ManyToOne

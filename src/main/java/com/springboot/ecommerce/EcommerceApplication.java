@@ -49,7 +49,7 @@ public class EcommerceApplication {
 				Store store = new Store("usa", "store " + i, "good");
 				storeService.save(store);
 
-				Category category = new Category("category " + i, "New category " + i);
+				Category category = new Category("category" + i, "New category " + i);
 				categoryService.save(category);
 
 				Product product = new Product("product " + i, "new product " + i, "good");

@@ -33,6 +33,9 @@ public class Product {
     @JoinColumn(
             name = "categoryId"
     )
+    @JsonBackReference(
+            value = "category-product"
+    )
     private Category category;
 
     @ManyToOne
@@ -46,6 +49,9 @@ public class Product {
 
     @OneToOne(
             mappedBy = "product"
+    )
+    @JsonManagedReference(
+            value = "voucher-product"
     )
     private Voucher voucher;
 

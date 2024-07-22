@@ -1,5 +1,6 @@
 package com.springboot.ecommerce.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,6 +26,9 @@ public class Category {
 
     @OneToOne(
             mappedBy = "category"
+    )
+    @JsonManagedReference(
+            value = "category-product"
     )
     private Product product;
 
